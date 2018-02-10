@@ -1,9 +1,9 @@
 class CreateTransactions < ActiveRecord::Migration[5.1]
   def change
-    create_table :transactions do |t|
-      t.float :score
+    create_table :money_operations do |t|
       t.string :info
-      t.integer :type_id
+      t.float :score
+      t.integer :transaction_type_id
       t.integer :user_id
 
       t.timestamps

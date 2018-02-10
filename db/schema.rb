@@ -12,17 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20180210072427) do
 
-  create_table "transaction_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "type_name"
+  create_table "money_operations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "info"
+    t.float "score", limit: 24
+    t.integer "transaction_type_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float "score", limit: 24
-    t.string "info"
-    t.integer "type_id"
-    t.integer "user_id"
+  create_table "transaction_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

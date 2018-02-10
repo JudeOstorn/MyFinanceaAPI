@@ -6,11 +6,15 @@ class InfoController < ApplicationController
   end
 
   def show_finances
-    @user = User.find(params[:id])
-    income = Transaction.where(user_id: @user, type_id: 1)
-    income = income.map { |i| i.score }
-    consumption = Transaction.where(user_id: @user, type_id: 2)
-    response = {finances: @user.finances, income: income.score, consumption: consumption.score }
+    #@user = User.find(params[:id])
+    incomes = MoneyOperation.where(user_id: 1, transaction_type_id: 1)
+    income = incomes.map { |i| i.score }.inject(:+)
+    consumptions = MoneyOperation.where(user_id: 1, transaction_type_id: 2)
+    consumption = consumptions.map { |i| i.score }.inject(:+)
+    finances = income - consumption
+    response = {finances: finances,
+                income: income,
+                consumption: consumption }
     render json: response
   end
 
